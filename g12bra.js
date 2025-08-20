@@ -6,7 +6,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 async function listarClubesComBrasileirao() {
-    // Buscar clubes
+    
     const { data: clubes, error: clubesError } = await supabase
         .from('clubes_brasileiros')
         .select('id, nome, estado_id');
@@ -16,7 +16,7 @@ async function listarClubesComBrasileirao() {
         return;
     }
 
-    // Buscar estados
+    
     const { data: estados, error: estadosError } = await supabase
         .from('estado')
         .select('id, nome');
@@ -37,7 +37,6 @@ async function listarClubesComBrasileirao() {
         return;
     }
 
-    // Combinar dados
     const resultado = clubes.map(clube => {
         const estado = estados.find(e => e.id === clube.estado_id);
         const titulo = titulos.find(t => t.clube_id === clube.id);
